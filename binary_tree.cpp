@@ -141,7 +141,7 @@ void tree::del(int data){
         child = r->left;
         }
         else{
-            child = r->left;
+            child = r->right;
         }
 //========================================================
         if(r == root){  // if target was root
@@ -168,11 +168,11 @@ void tree::del(int data){
 
         r->value = nextOfTarget->value;
 
-        if(nextOfTarget_parent->left = nextOfTarget){ // if nextOfTarget had no child 
+        if(nextOfTarget_parent->left == nextOfTarget){ // if nextOfTarget had no child 
             nextOfTarget_parent->left = nextOfTarget->right; // its definitely nullptr 
             
         }
-        else if(nextOfTarget_parent->right = nextOfTarget){ // if nextOfTarget had just right child 
+        else if(nextOfTarget_parent->right == nextOfTarget){ // if nextOfTarget had just right child 
             nextOfTarget_parent->right = nextOfTarget->right; 
         }
 
@@ -184,13 +184,47 @@ void tree::del(int data){
 
 int main(){
     tree t;
-    t.add(5);
-    t.add(7);
-    t.add(10);
-    t.add(1);
-    t.add(8);
-    t.del(8);
-    cout << t.search(8);
+    int choice;
+    int data;
+
+    while(true){
+        cout << "\n========= Binary Search Tree =========\n";
+        cout << "1. Add a number\n";
+        cout << "2. Delete a number\n";
+        cout << "3. Search a number\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice : ";
+        cin >> choice;
+
+        if(choice == 1){
+            cout << "Enter the number to add : ";
+            cin >> data;
+            t.add(data);
+            cout << data << " added successfully.\n";
+        }
+        else if(choice == 2){
+            cout << "Enter the number to delete : ";
+            cin >> data;
+            t.del(data);
+        }
+        else if(choice == 3){
+            cout << "Enter the number to search : ";
+            cin >> data;
+            if(t.search(data)){
+                cout << data << " found in the tree.\n";
+            }
+            else{
+                cout << data << " not found in the tree.\n";
+            }
+        }
+        else if(choice == 4){
+            cout << "Exiting...\n";
+            break;
+        }
+        else{
+            cout << "Invalid choice, try again.\n";
+        }
+    }
 
     return 0;
 }
